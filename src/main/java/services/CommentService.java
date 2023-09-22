@@ -3,14 +3,22 @@ package services;
 import entities.Comment;
 import models.ICommentNotificationProxy;
 import models.ICommentRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
+@Service
+@Qualifier("push")
 public class CommentService {
 
     private final ICommentNotificationProxy commentNotificationProxy;
 
     private final ICommentRepository commentRepository;
 
-    public CommentService(ICommentRepository commentRepository, ICommentNotificationProxy commentNotificationProxy) {
+    @Autowired
+    public CommentService(ICommentRepository commentRepository,
+                          @Qualifier("EMAIL") ICommentNotificationProxy commentNotificationProxy) {
         this.commentNotificationProxy = commentNotificationProxy;
         this.commentRepository = commentRepository;
     }
