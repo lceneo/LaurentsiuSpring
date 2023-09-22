@@ -19,6 +19,7 @@ public class CommentService {
     @Autowired
     public CommentService(ICommentRepository commentRepository,
                           @Qualifier("EMAIL") ICommentNotificationProxy commentNotificationProxy) {
+        System.out.println("CommentService initialised");
         this.commentNotificationProxy = commentNotificationProxy;
         this.commentRepository = commentRepository;
     }
