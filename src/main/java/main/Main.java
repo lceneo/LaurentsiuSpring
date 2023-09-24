@@ -15,7 +15,8 @@ public class Main {
         comment.setAuthor("Laurentiu");
         comment.setText("Demo comment");
 
+        System.out.println("Before creating bean");
         var commentService = context.getBean(CommentService.class);
-        commentService.publishComment(comment);
+        System.out.println("After creating bean");
     }
 }

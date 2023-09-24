@@ -5,10 +5,12 @@ import models.ICommentNotificationProxy;
 import models.ICommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 @Service
+@Lazy
 @Qualifier("push")
 public class CommentService {
 
@@ -19,6 +21,7 @@ public class CommentService {
     @Autowired
     public CommentService(ICommentRepository commentRepository,
                           @Qualifier("EMAIL") ICommentNotificationProxy commentNotificationProxy) {
+        System.out.println("CommentService initialised");
         this.commentNotificationProxy = commentNotificationProxy;
         this.commentRepository = commentRepository;
     }
@@ -28,3 +31,4 @@ public class CommentService {
         this.commentNotificationProxy.sendComment(comment);
     }
 }
+
