@@ -1,22 +1,18 @@
 package main;
 
 import config.ProjectConfig;
-import entities.Comment;
-import models.ICommentNotificationProxy;
-import models.ICommentRepository;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import repositories.DBCommentRepository;
 import services.CommentService;
+import services.UserService;
 
 public class Main {
     public static void main(String[] args) {
         var context = new AnnotationConfigApplicationContext(ProjectConfig.class);
-        var comment = new Comment();
-        comment.setAuthor("Laurentiu");
-        comment.setText("Demo comment");
 
-        System.out.println("Before creating bean");
         var commentService = context.getBean(CommentService.class);
-        System.out.println("After creating bean");
+        var userService = context.getBean(UserService.class);
+
+        System.out.println(commentService.getCommentRepository() == userService.getCommentRepository());
+        System.out.println(commentService.getClass());
     }
 }
