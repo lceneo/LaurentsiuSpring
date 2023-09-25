@@ -1,18 +1,25 @@
 package main;
 
 import config.ProjectConfig;
+import entities.Comment;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import services.CommentService;
-import services.UserService;
+
+import java.util.logging.Logger;
 
 public class Main {
+
+    private static Logger logger = Logger.getLogger(Main.class.getName());
+
     public static void main(String[] args) {
         var context = new AnnotationConfigApplicationContext(ProjectConfig.class);
 
-        var commentService = context.getBean(CommentService.class);
-        var userService = context.getBean(UserService.class);
+        var service = context.getBean(CommentService.class);
+        var comment = new Comment();
+        comment.setText("Demo comment");
+        comment.setAuthor("Natasha");
 
-        System.out.println(commentService.getCommentRepository() == userService.getCommentRepository());
-        System.out.println(commentService.getClass());
+        var result = service.publishComment(comment);
+        logger.info(result);
     }
 }
